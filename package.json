@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prime": "node ./tools/primenumber",
+    "magic": "node ./tools/magicnumbers",
+    "pln": "node ./tools/pln",
     "csv": "php csv.php"
   },
   "dependencies": {
