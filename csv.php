@@ -6,12 +6,18 @@ if (($handle = fopen("input.csv","r")) != false) {
 		$cnt++;
 		$num = count($data);
 		// check columns count
-		if ($num != 4) {
-			echo "Warning!! There is malformatted data on line ".$cnt;
+		if (($num != 4) && ($cnt > 2)) {
+			echo "Warning!! There is malformatted row on line ".$cnt;
 			exit();
 		}
 		
 		// should check email format
+		if (!(isValidEmailAddress($data[1])) && ($cnt > 3) && ($data[1] != '')) {
+			echo "Warning!! Email format error ".$cnt;
+			exit();	
+		} else {
+			$data[1] = strtolower($data[1]);
+		}
 		// end of email format check
 		
 		$duplicate = false;
@@ -32,9 +38,8 @@ if (($handle = fopen("input.csv","r")) != false) {
 			$index++;
 		}
 		// if not duplicate, add to array
-		if (!($duplicate))
+		if (!($duplicate) && $cnt > 2)
 			$arr[] = $data;	
-
 	}
 
 	fclose($handle);
@@ -46,4 +51,14 @@ foreach ($arr as $field) {
 	fputcsv($fp, $field);
 }
 fclose($fp);
+
+echo "Process Done !! File saved as output.csv";
+
+function isValidEmailAddress($email) {
+	$regex = "/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/";
+	if ( preg_match( $regex, $email ) ) {
+	    return true;
+	}
+	return false;
+}
 // print_r($arr);
