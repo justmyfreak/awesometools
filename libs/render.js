@@ -8,8 +8,7 @@ var render = {
 		// if primes is only one, break the operation and write to file
 		if (arrayData.length == 1) {
 			this.result += arrayData[0];
-			this.write();
-			return;
+			return this.result;
 		}
 
 		var resTemp = "";
