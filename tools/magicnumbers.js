@@ -1,4 +1,3 @@
-var _ = require("underscore");
 var fs = require("fs");
 var render = require('../libs/render');
 var write = require('../libs/write');
