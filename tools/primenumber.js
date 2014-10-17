@@ -35,11 +35,13 @@ var prime = {
 		var resTemp = "";
 		var delTemp = this.delimeter;
 		var andTemp = this.and;
+		// for each prime numbers without the last one, add ', '
 		_.each(_.first(this.primes, this.primes.length - 1), function (item) {
 			resTemp += item + delTemp;
 		});
 		this.result = resTemp;
 
+		// last prime number must be aded 'and '
 		this.result += andTemp+_.last(this.primes);
 		// wite to file
 		this.write();
