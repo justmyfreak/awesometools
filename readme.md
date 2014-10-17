@@ -16,6 +16,10 @@ Run following command :
 
 	npm run-script prime
 
+or
+
+	node tools/primenumber.js
+
 ## Magic Number
 Input : `input/magic-input.text`
 Output: `result/magic-result.txt`
@@ -25,6 +29,10 @@ Run following command :
 
 	npm run-script magic
 
+or
+
+	node tools/magicnumbers.js
+
 ## CSV
 This script is written in PHP. 
 Input : `input.csv`
@@ -32,7 +40,7 @@ Output: `output.csv`
 ### Command
 Run following command : 
 
-	npm run-script magic
+	npm run-script csv
 
 or 
 
@@ -42,3 +50,7 @@ or
 ### Run following command : 
 
 	npm run-script pln
+
+or
+
+	node tools/pln.js
