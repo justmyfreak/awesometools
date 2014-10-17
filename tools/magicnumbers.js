@@ -56,11 +56,10 @@ var magic = {
 		write.simpleWrite(this.outputFile, this.result);
 	},
 	run: function() {
-		magic.prepareData(10000);
+		magic.prepareData(0);
 		magic.check();
 		magic.render();
 		magic.write();
-		console.log(magic.result);
 	}
 
 }
