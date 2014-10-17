@@ -3,6 +3,7 @@ var fs = require("fs");
 
 var magic = {
 	validData: [],
+	magicNumbers: [],
 	isMagicNumber: function(value) {
 		var valInt = parseInt(value);
 		// console.log(valInt);
@@ -36,9 +37,18 @@ var magic = {
 				this.validData.push(str);
 			}
 		}
+	},
+	check: function() {
+		// this function is used to check whether the number magic number or not. 
+		for (var i = 0; i < this.validData.length; i++) {
+			if (this.isMagicNumber(this.validData[i]))
+				this.magicNumbers.push(this.validData[i]);
+		}
 	}
 }
 
-magic.prepareData(1000);
-console.log(magic.validData);
-console.log(magic.isMagicNumber('00'));
+magic.prepareData(1000000);
+magic.check();
+console.log(magic.magicNumbers);
+// console.log(magic.validData);
+// console.log(magic.isMagicNumber('00'));
