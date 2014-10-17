@@ -96,10 +96,16 @@ var prime = {
 			return true
 
 		return false;
+	},
+	run: function() {
+		this.readFile();
+		this.check(this.count);
+		this.render();
 	}
 };
 
-prime.check(100);
-prime.readFile();
+prime.run();
+// prime.check(100);
+// prime.readFile();
 // prime.render();
-console.log(prime.result);
+// console.log(prime.result);
