@@ -1,4 +1,5 @@
 var _ = require("underscore");
+var fs = require("fs");
 var count = 20;
 var and = "and";
 
@@ -8,6 +9,9 @@ var prime = {
 	result: "",
 	delimeter: ", ",
 	and: "and ",
+	start: "**************************START**************************",
+	end: "***************************END***************************",
+	outputFile: "result/prime-result.txt",
 	isPrime: function (number) {
 		if (number < 2)
 			return false;
@@ -47,10 +51,17 @@ var prime = {
 		this.write();
 	},
 	write: function() {
-		console.log('it should be write');
+		var compose = this.start+"\n"+this.result+"\n"+this.end;
+		fs.writeFile(this.outputFile, compose, function(err) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("Process Done !! Ouput File : result/prime-result.txt");
+			}
+		});
 	}
 };
 
-prime.check(20);
+prime.check(100);
 prime.render()
 console.log(prime.result);
