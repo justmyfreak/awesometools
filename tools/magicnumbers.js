@@ -1,13 +1,14 @@
 var fs = require("fs");
 var render = require('../libs/render');
 var write = require('../libs/write');
+var read = require('../libs/read');
 
 var magic = {
 	validData: [],
 	magicNumbers: [],
 	result: "",
 	outputFile: "magic-result.txt",
-	inputFile: "input/magic-input.txt",
+	inputFile: "magic-input.txt",
 	isMagicNumber: function(value) {
 		var valInt = parseInt(value);
 		var half = (value.length / 2);
@@ -55,7 +56,8 @@ var magic = {
 		write.simpleWrite(this.outputFile, this.result);
 	},
 	run: function() {
-		magic.prepareData(0);
+		var data = read.simpleRead(this.inputFile);
+		magic.prepareData(data);
 		magic.check();
 		magic.render();
 		magic.write();
