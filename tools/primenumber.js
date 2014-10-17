@@ -1,9 +1,6 @@
 var _ = require("underscore");
 var fs = require("fs");
-var count = 20;
-var and = "and";
 
-var res = "";
 var prime = {
 	count: 0,
 	primes: [],
@@ -106,7 +103,3 @@ var prime = {
 };
 
 prime.run();
-// prime.check(100);
-// prime.readFile();
-// prime.render();
-// console.log(prime.result);
