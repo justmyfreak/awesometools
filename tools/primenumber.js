@@ -7,6 +7,7 @@ var prime = {
 	primes: [],
 	result: "",
 	delimeter: ", ",
+	and: "and ",
 	isPrime: function (number) {
 		if (number < 2)
 			return false;
@@ -32,8 +33,8 @@ var prime = {
 		}
 
 		var resTemp = "";
-		var delTemp = ", ";
-		var andTemp = "and ";
+		var delTemp = this.delimeter;
+		var andTemp = this.and;
 		_.each(_.first(this.primes, this.primes.length - 1), function (item) {
 			resTemp += item + delTemp;
 		});
