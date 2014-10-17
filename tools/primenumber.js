@@ -10,8 +10,9 @@ var prime = {
 	result: "",
 	delimeter: ", ",
 	and: "and ",
-	start: "**************************START**************************",
-	end: "***************************END***************************",
+	fileHeader: "/**************************** prime-result.txt ******************************/",
+	start: "/***********************************START***********************************/",
+	end: "/************************************END************************************/",
 	outputFile: "result/prime-result.txt",
 	inputFile: "input/prime-input.txt",
 	isPrime: function (number) {
@@ -53,7 +54,7 @@ var prime = {
 		this.write();
 	},
 	write: function() {
-		var compose = this.start+"\n"+this.result+"\n"+this.end;
+		var compose = this.fileHeader+"\n"+this.start+"\n"+this.result+"\n"+this.end;
 		fs.writeFile(this.outputFile, compose, function(err) {
 			if (err) {
 				console.log(err);
