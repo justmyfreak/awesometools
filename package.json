@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prime": "node ./tools/primenumber"
   },
+  "dependencies": {
+    "underscore": "^1.7.0"
+  },
   "author": "Zainul Setyo P",
   "license": "MIT"
 }
