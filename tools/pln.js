@@ -3,6 +3,7 @@ var write = require('../libs/write');
 var _ = require('underscore');
 
 var pln = {
+	result: "",
 	initialData: [],
 	orderedData: [],
 	init: function(kecamatan) {
@@ -57,9 +58,16 @@ var pln = {
 				counter++;			
 			}
 		}
+	},
+	render: function() {
+		this.result = render.simpleRender(this.orderedData);
+	},
+	run: function() {
+		this.init(17);
+		this.roulette(7, 5);
+		this.render();
+		console.log(this.result);
 	}
 }
 
-pln.init(17);
-pln.roulette(7, 5);
-console.log(pln.orderedData);
+pln.run();
