@@ -5,6 +5,7 @@ if (($handle = fopen("input.csv","r")) != false) {
 	while (($data = fgetcsv($handle, 1000, ",")) != false) {
 		$cnt++;
 		$num = count($data);
+
 		// check columns count
 		if (($num != 4) && ($cnt > 2)) {
 			echo "Warning!! There is malformatted row on line ".$cnt;
@@ -16,6 +17,7 @@ if (($handle = fopen("input.csv","r")) != false) {
 			echo "Warning!! Email format error ".$cnt;
 			exit();	
 		} else {
+			// lowercase email
 			$data[1] = strtolower($data[1]);
 		}
 		// end of email format check
@@ -23,8 +25,7 @@ if (($handle = fopen("input.csv","r")) != false) {
 		$duplicate = false;
 		$index = 0;
 		foreach ($arr as $item) {
-			if ($item[0] == $data[0]) {
-				
+			if ($item[0] == $data[0]) {			
 				// update current data if new data contains no-blank data
 				if ($data[1] != '')
 					$arr[$index][1] = $data[1];
@@ -47,6 +48,7 @@ if (($handle = fopen("input.csv","r")) != false) {
 
 // write file
 $fp = fopen('output.csv', "w");
+// foreach record 
 foreach ($arr as $field) {
 	fputcsv($fp, $field);
 }
@@ -61,4 +63,3 @@ function isValidEmailAddress($email) {
 	}
 	return false;
 }
-// print_r($arr);
