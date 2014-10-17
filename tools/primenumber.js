@@ -5,6 +5,7 @@ var and = "and";
 
 var res = "";
 var prime = {
+	count: 0,
 	primes: [],
 	result: "",
 	delimeter: ", ",
@@ -12,6 +13,7 @@ var prime = {
 	start: "**************************START**************************",
 	end: "***************************END***************************",
 	outputFile: "result/prime-result.txt",
+	inputFile: "input/prime-input.txt",
 	isPrime: function (number) {
 		if (number < 2)
 			return false;
@@ -59,9 +61,45 @@ var prime = {
 				console.log("Process Done !! Ouput File : result/prime-result.txt");
 			}
 		});
+	},
+	readFile: function() {
+		// get file content and save as string
+		var content = fs.readFileSync(this.inputFile, 'utf8');
+		// check if file is empty throw warning
+		if (content == '') {
+			console.log('Warning !!! Input input file is empty');
+			return;
+		}
+
+		// check whether input is one line or not
+		if (this.isMoreThanOneLine(content)) {
+			console.log('Warning !!! Input must be one line only');
+		} else {
+			// check whether input countains alphabet or not
+			if (this.isContainAlphabet(content)) {
+				console.log('Warning !!! There is alphabet inside file. Process Terminated')
+				return;
+			} else {
+				this.count = parseInt(content);
+			}
+		}
+		
+	},
+	isMoreThanOneLine: function(value) {
+		if ((value.split('\n').length) > 1)
+			return true;
+
+		return false; 
+	},
+	isContainAlphabet: function(value) {
+		if (value.match(/[a-z]/i))
+			return true
+
+		return false;
 	}
 };
 
 prime.check(100);
-prime.render()
+prime.readFile();
+// prime.render();
 console.log(prime.result);
