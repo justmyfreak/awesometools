@@ -3,7 +3,8 @@ This repository is a programming challange for joining a startup company in Indo
 
 # How to Run
 `nodejs` must be installed installed in your machine.
-run `npm install` to install all dependencies
+run `npm install` to install all dependencies.
+Scripts are located on `tools`, and libraries are located on `libs`.
 
 ## Prime Number 
 Printing prime number from given number. For example : 100 will show prime numbers from 2 to 100. The input is from file and the result will be saved in another file.
@@ -12,6 +13,7 @@ Output: `result/prime-result.txt`
 
 ### Command
 Run following command : 
+
 	npm run-script prime
 
 ## Magic Number
@@ -20,6 +22,7 @@ Output: `result/magic-result.txt`
 
 ### Command
 Run following command : 
+
 	npm run-script magic
 
 ## CSV
@@ -28,10 +31,14 @@ Input : `input.csv`
 Output: `output.csv`
 ### Command
 Run following command : 
+
 	npm run-script magic
-	or 
+
+or 
+
 	php csv.php
 
 ## PLN Problem
 ### Run following command : 
+
 	npm run-script pln
