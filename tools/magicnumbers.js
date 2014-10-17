@@ -1,15 +1,13 @@
 var _ = require("underscore");
 var fs = require("fs");
 var render = require('../libs/render');
+var write = require('../libs/write');
 
 var magic = {
 	validData: [],
 	magicNumbers: [],
 	result: "",
-	fileHeader: "/**************************** magic-result.txt ******************************/",
-	start: "/***********************************START***********************************/",
-	end: "/************************************END************************************/",
-	outputFile: "result/magic-result.txt",
+	outputFile: "magic-result.txt",
 	inputFile: "input/magic-input.txt",
 	isMagicNumber: function(value) {
 		var valInt = parseInt(value);
@@ -53,12 +51,18 @@ var magic = {
 	},
 	render: function() {
 		this.result = render.simpleRender(this.magicNumbers);
+	},
+	write: function() {
+		write.simpleWrite(this.outputFile, this.result);
+	},
+	run: function() {
+		magic.prepareData(10000);
+		magic.check();
+		magic.render();
+		magic.write();
+		console.log(magic.result);
 	}
+
 }
 
-magic.prepareData(0);
-magic.check();
-magic.render();
-console.log(magic.result);
-// console.log(magic.validData);
-// console.log(magic.isMagicNumber('00'));
+magic.run();
