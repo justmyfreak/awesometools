@@ -1,5 +1,8 @@
 var _ = require("underscore");
 var fs = require("fs");
+var render = require('../libs/render');
+var write = require('../libs/write');
+var read = require('../libs/read');
 
 var prime = {
 	count: 0,
@@ -10,8 +13,8 @@ var prime = {
 	fileHeader: "/**************************** prime-result.txt ******************************/",
 	start: "/***********************************START***********************************/",
 	end: "/************************************END************************************/",
-	outputFile: "result/prime-result.txt",
-	inputFile: "input/prime-input.txt",
+	outputFile: "prime-result.txt",
+	inputFile: "prime-input.txt",
 	isPrime: function (number) {
 		if (number < 2)
 			return false;
@@ -29,76 +32,19 @@ var prime = {
 		}
 	},
 	render: function() {
-		// if primes is only one, break the operation and write to file
-		if (this.primes.length == 1) {
-			this.result += this.primes[0];
-			this.write();
-			return;
-		}
-
-		var resTemp = "";
-		var delTemp = this.delimeter;
-		var andTemp = this.and;
-		// for each prime numbers without the last one, add ', '
-		_.each(_.first(this.primes, this.primes.length - 1), function (item) {
-			resTemp += item + delTemp;
-		});
-		this.result = resTemp;
-
-		// last prime number must be aded 'and '
-		this.result += andTemp+_.last(this.primes);
-		// wite to file
-		this.write();
+		this.result = render.simpleRender(this.primes);
 	},
 	write: function() {
-		var compose = this.fileHeader+"\n"+this.start+"\n"+this.result+"\n"+this.end;
-		fs.writeFile(this.outputFile, compose, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Process Done !! Ouput File : result/prime-result.txt");
-			}
-		});
+		write.simpleWrite(this.outputFile, this.result);
 	},
 	readFile: function() {
-		// get file content and save as string
-		var content = fs.readFileSync(this.inputFile, 'utf8');
-		// check if file is empty throw warning
-		if (content == '') {
-			console.log('Warning !!! Input input file is empty');
-			return;
-		}
-
-		// check whether input is one line or not
-		if (this.isMoreThanOneLine(content)) {
-			console.log('Warning !!! Input must be one line only');
-		} else {
-			// check whether input countains alphabet or not
-			if (this.isContainAlphabet(content)) {
-				console.log('Warning !!! There is alphabet inside file. Process Terminated')
-				return;
-			} else {
-				this.count = parseInt(content);
-			}
-		}
-		
-	},
-	isMoreThanOneLine: function(value) {
-		if ((value.split('\n').length) > 1)
-			return true;
-
-		return false; 
-	},
-	isContainAlphabet: function(value) {
-		if (value.match(/[a-z]/i))
-			return true
-
-		return false;
+		this.count = read.simpleRead(this.inputFile);
 	},
 	run: function() {
 		this.readFile();
 		this.check(this.count);
 		this.render();
+		this.write();
 	}
 };
 

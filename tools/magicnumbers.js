@@ -4,6 +4,7 @@ var write = require('../libs/write');
 var read = require('../libs/read');
 
 var magic = {
+	count: 0,
 	validData: [],
 	magicNumbers: [],
 	result: "",
@@ -25,9 +26,9 @@ var magic = {
 
 		return false;
 	},
-	prepareData: function(totalData) {
+	prepareData: function() {
 		// loop for total data
-		for (var i = 0; i <= totalData; i++) {
+		for (var i = 0; i <= this.count; i++) {
 			// count number
 			var numStr = i.toString();
 
@@ -49,6 +50,9 @@ var magic = {
 				this.magicNumbers.push(this.validData[i]);
 		}
 	},
+	readFile: function() {
+		this.count = read.simpleRead(this.inputFile);
+	},
 	render: function() {
 		this.result = render.simpleRender(this.magicNumbers);
 	},
@@ -56,8 +60,8 @@ var magic = {
 		write.simpleWrite(this.outputFile, this.result);
 	},
 	run: function() {
-		var data = read.simpleRead(this.inputFile);
-		magic.prepareData(data);
+		this.readFile()
+		magic.prepareData();
 		magic.check();
 		magic.render();
 		magic.write();
