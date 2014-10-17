@@ -15,14 +15,25 @@ var pln = {
 		var counter = 0;
 		var stepCounter = 5;
 		while (this.initialData.length != 0) {
-		// while (counter <= this.initialData.length) {
 			if (stepCounter == 5) {
-				console.log("counter : "+counter+" value : "+this.initialData[counter]);
-				this.orderedData.push(this.initialData[counter]);
-				// this.initialData.splice(counter, 1);	
-			}
+				if (this.initialData[counter] != last) {
+					this.orderedData.push(this.initialData[counter]);
+				} else {
+					var nextIndex = counter + 1;
+					if (nextIndex == this.initialData.length) {
+						nextIndex = 0;
+					} 
 
-			if (stepCounter == step) {
+					if (this.initialData.length > 1) {
+						// console.log("should be last push : counter : "+counter+", "+stepCounter+" value : "+this.initialData[counter]+ " total of data : "+this.initialData.length + " next index "+nextIndex);
+						this.orderedData.push(this.initialData[nextIndex]);
+						
+					} else {
+						this.orderedData.push(this.initialData[counter]);
+					}
+				}
+			}
+			if (stepCounter >= step) {
 				stepCounter = 1
 			} else {
 				stepCounter++;
@@ -34,10 +45,7 @@ var pln = {
 			} else {
 				counter++;			
 			}
-			// counter += step;			
 		}
-		this.initialData = _.difference(this.initialData, this.orderedData);
-		console.log(this.initialData);
 	}
 }
 
